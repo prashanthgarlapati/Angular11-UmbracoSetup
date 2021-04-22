@@ -6,19 +6,28 @@
     <div class="spacer"></div>
 </div>
 
-<div class="content" role="main">
-
-    <div *ngIf="umbracoData && dropdownList">
+<div *ngIf="umbracoData && dropdownList" class="content" role="main">
+    <section>
         <h2>{{umbracoData?.name}}, This is a <i>{{dropdownList?.name}}</i></h2>
         <!-- <p>{{umbracoData?.description}}</p> -->
-    </div>
-    <div class="member-info-field">
+    </section>
+    <div>
         <label id="client-selection" for="client-selection">Client Selection</label>
         <single-select-dropdown label="client-selection" formControlName="">
             <ng-container *ngFor="let option of dropdownOptions">
                 <single-select-option [name]="option" [value]="option"></single-select-option>
             </ng-container>
         </single-select-dropdown>
+    </div>
+    <div style="margin-top:2rem;">
+        <p id="client-selection">SubMenu Example</p>
+        <details *ngFor="let option of dropdownOptions" class="dropdown-main">
+            <summary [innerHtml]="option" class="dropdown-list">
+            </summary>
+            <div>
+                <div class="sub-menu" *ngFor="let innerList of submenu" [innerHtml]="innerList"></div>
+            </div>
+        </details>
     </div>
 
 </div>

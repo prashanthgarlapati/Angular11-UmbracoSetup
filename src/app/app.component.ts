@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   umbracoData: UmbracoData;
   dropdownList: UmbracoDropdown;
   dropdownOptions = [];
-
+  submenu = [];
   constructor(private getDataService: UmbracoDataService) { }
 
   ngOnInit() {
@@ -31,7 +31,10 @@ export class AppComponent implements OnInit {
     this.getDataService.getdropdownList().subscribe(data => {
       this.dropdownList = data;
       this.dropdownOptions = this.dropdownList.menu;
-      console.log(this.dropdownList);
+      this.submenu = this.dropdownList.sublist;
+      console.log('dropdown', this.dropdownOptions);
+      console.log('submenu', this.submenu);
+
     })
   }
 
