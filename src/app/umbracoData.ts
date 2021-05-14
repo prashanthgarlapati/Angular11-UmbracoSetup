@@ -14,5 +14,6 @@ export interface UmbracoDropdown {
     parentId: number;
     submenuItems: [];
     sortOrder: number;
-    sublist: [];
+    topic: [];
+    subTopic: [];
 }

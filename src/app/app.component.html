@@ -9,7 +9,6 @@
 <div *ngIf="umbracoData && dropdownList" class="content" role="main">
     <section>
         <h2>{{umbracoData?.name}}, This is a <i>{{dropdownList?.name}}</i></h2>
-        <!-- <p>{{umbracoData?.description}}</p> -->
     </section>
     <div>
         <label id="client-selection" for="client-selection">Client Selection</label>
@@ -20,14 +19,33 @@
         </single-select-dropdown>
     </div>
     <div style="margin-top:2rem;">
+        <h2>This is a nested dropdown example</h2>
         <p id="client-selection">SubMenu Example</p>
-        <details *ngFor="let option of dropdownOptions" class="dropdown-main">
-            <summary [innerHtml]="option" class="dropdown-list">
-            </summary>
-            <div>
-                <div class="sub-menu" *ngFor="let innerList of submenu" [innerHtml]="innerList"></div>
-            </div>
+        <details class="dropdown-main">
+            <summary class="dropdown-list"></summary>
+            <details *ngFor="let topicName of topic" [open]="topicName.isOpen" class="dropdown-main">
+                <summary [innerHtml]="topicName" [value]="topic" class="dropdown-list"></summary>
+                <ng-container *ngFor="let subTopicName of subTopic">
+                    <div *ngIf="topicName === 'After Hours Callback Request'" class="sub-menu" [innerHtml]="subTopicName"></div>
+                </ng-container>
+            </details>
         </details>
     </div>
-
+    <br><br>
+    <div style="margin-top:2rem;">
+        <h2>This is another sample nested dropdown example</h2>
+        <p id="client-selection">SubMenu Example</p>
+        <details class="dropdown-main">
+            <summary class="dropdown-list"></summary>
+            <details *ngFor="let topicName of sampleData" [open]="topicName.isOpen" class="dropdown-main">
+                <summary [innerHtml]="topicName.discussionTopic" [value]="topic" class="dropdown-list"></summary>
+                <ng-container *ngFor="let topic of topicName">
+                    <div class="sub-menu" [innerHtml]="topic.subTopics"></div>
+                </ng-container>
+            </details>
+        </details>
+    </div>
+    <br><br>
+    <h2>Umbraco Rich Text Editor Example</h2>
+    <div [innerHtml]="umbracoData?.description"></div>
 </div>
